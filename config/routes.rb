@@ -3,8 +3,12 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   devise_for :users
 
-  resources :items
-  # resources :users
-  # resources :orders
+  resources :items do
+    member do
+      get :toggle # 찜하기
+    end
+  end
+
+  resources :orders
   root "items#index"
 end

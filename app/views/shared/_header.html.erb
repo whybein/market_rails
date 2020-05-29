@@ -6,9 +6,9 @@
     </button>
     <div class="collapse navbar-collapse justify-content-between" id="navbarNavDropdown">
       <ul class="navbar-nav">
-        <%= Category.order(:position).each do |category| %>
+        <% Category.order(:position).each do |category| %>
           <li class="nav-item">
-            <a class="nav-link <%= params[:category_id].to_i == category.id ? "active" : "" %>" href="<% items_path(category_id: category.id) %>"><%= category.title %></a>
+            <a class="nav-link <%= params[:category_id].to_i == category.id ? "active" : "" %>" href="<%= items_path(category_id: category.id) %>"><%= category.title %></a>
           </li>
         <% end %>
       </ul>
@@ -19,9 +19,9 @@
               마이페이지
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
+              <a class="dropdown-item" href="<%= items_path(type: :selling) %>">나의 상품</a>
+              <a class="dropdown-item" href="<%= orders_path %>">나의 주문</a>
+              <a class="dropdown-item" href="<%= edit_user_registration_path %>">회원정보수정</a>
             </div>
           </li>
           <li class="nav-item">
