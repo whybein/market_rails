@@ -4,6 +4,8 @@ class Item < ApplicationRecord
   belongs_to :user, optional: true
   belongs_to :category, optional: true
 
+  has_many :line_items, dependent: :nullify
+  
   def self.generate_items
     %w(아이폰 안드로이드 아이패드 맥북 시계 애플워치 갤럭시기어).each do |title|
       category = Category.first

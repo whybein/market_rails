@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:toggle] # 찜하기 로그인 해야 사용 가능
-  before_action :load_object, only: [:show, :toggle] # 상품 상세와 찜하기는 @item을 먼저 불러옴
+  before_action :load_object, only: [:show, :toggle, :edit] # 상품 상세와 찜하기는 @item을 먼저 불러옴
   def index
     # 내가 판매하는 상품
     if params[:type] == "selling"
@@ -25,6 +25,14 @@ class ItemsController < ApplicationController
       flash[:notice] = "찜하였습니다."
     end
     redirect_to @item
+  end
+
+  def edit
+    @order = get_cart
+    line_item = @order.line_items.where(item: @item).first_or_create(price: @item.price)
+    line_item.increment!(:amount)
+    line_item.set_order_total
+    redirect_to new_order_path, notice: "장바구니에 상품을 담았습니다."
   end
 
   def show
