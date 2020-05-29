@@ -7,8 +7,8 @@
       <h4><%= @item.title %></h4>
       <p><%= number_with_delimiter @item.price %>원</p>
       <%= link_to current_user&.has_item?(@item) ? "찜취소하기" : "찜하기", toggle_item_path(@item), class: "btn btn-primary" %>
-      <%= link_to "장바구니 담기", edit_item_path(@item), class: "btn btn-secondary" %>
-      <!-- edit액션 대신 add 도는 orders 컨트롤러의 액션 등을 사용할 수 있으나 itesms#edit 액션을 사용할 일이 없으므로 대신 사용 -->
+      <%= link_to "장바구니 담기", add_item_path(@item), class: "btn btn-secondary" %>
+      <!-- edit액션 대신 add 도는 orders 컨트롤러의 액션 등을 사용할 수 있으나 itesms#edit 액션을 사용할 일이 없으므로 대신 사add -->
     </div>
   </div>
   <div class="row mt-3">

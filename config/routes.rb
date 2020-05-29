@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :items do
     member do
       get :toggle # 찜하기
+      get :add # 장바구니 추가
     end
   end
 
