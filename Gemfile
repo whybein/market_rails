@@ -11,6 +11,7 @@ gem 'devise-i18n'
 
 # 어드민
 gem 'activeadmin'
+gem 'active_skin'
 
 # bootstrap - 반응형 웹 템플릿
 gem 'bootstrap', '~> 4.3.1'
@@ -27,6 +28,7 @@ gem 'rails-i18n'
 # 파일 또는 이미지 첨부
 gem 'carrierwave'
 gem 'mini_magick'
+
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.1'

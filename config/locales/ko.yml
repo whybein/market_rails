@@ -20,3 +20,5 @@ ko:
       item: 상품
       order: 주문
       item_user: 찜
+      user_item: 찜
+      line_item: 주문항목

@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show] # 찜하기 로그인 해야 사용 가능
   before_action :load_object, only: [:show, :toggle, :edit, :update, :destroy] # 상품 상세와 찜하기는 @item을 먼저 불러옴
   before_action :check_owner, only: [:edit, :update, :destroy] # 수정/삭제는 상품 소유자만 할 수 있도록
+
   def index
     # 내가 판매하는 상품
     if params[:type] == "selling"
@@ -10,8 +11,13 @@ class ItemsController < ApplicationController
     else
       @items = Item.all
       # 카테고리별 페이지
-      @items = @items.where(category_id: params[:category_id]) if params[:category_id].present?
+      if params[:category_id].present?
+        @category = Category.find(params[:category_id])
+        @items = @items.where(category_id: params[:category_id])
+      end
     end
+    @items = @items.ransack(title_or_description_cont: params[:q]).result(distinct: true) if params[:q].present?
+    @items = params[:order].blank? ? @items.order(created_at: :desc) : @items.order(params[:order])
     @items = @items.page(params[:page]).per(20)
   end
 

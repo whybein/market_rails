@@ -13,7 +13,7 @@ ActiveAdmin.setup do |config|
 
   # 액티브 어드민에서 제공하는 코멘트 기능 이용하지 않기
   config.comments = false
-  
+
   # Set the link url for the title. For example, to take
   # users to your main site. Defaults to no link.
   #
@@ -125,7 +125,7 @@ ActiveAdmin.setup do |config|
   # roots for each namespace.
   #
   # Default:
-  # config.root_to = 'dashboard#index'
+  config.root_to = 'users#index'
 
   # == Admin Comments
   #
