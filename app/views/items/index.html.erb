@@ -32,7 +32,7 @@
             <div class="card-subtitle">판매자: <%= item.user&.email %></div>
             <p class="card-text"><%= item.description.truncate(15) %></p>
             <p class="text-muted"><%= number_with_delimiter item.price %>원</p>
-            <%= link_to "자세히 보기", item, class: "btn btn-primary btn-sm" %>
+            <%= link_to "자세히 보기", item_path(item), class: "btn btn-primary btn-sm" %>
 
           </div>
           <div class="card-footer">

@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :load_object, :check_owner, only: [:edit, :show, :update]
   # 다른 사람도 주문 아이디만 알면 접근이 간으한 상태이므로 내 주문은 나만 볼수 있도 권한 체크
+  before_action :load_object, :check_owner, only: [:edit, :show, :update]
 
 
   def new
@@ -16,6 +16,12 @@ class OrdersController < ApplicationController
     @order.paid!
     @order.update(paid_at: Time.now)
     redirect_to @order
+  end
+
+  def destroy
+    @order = Order.find(params[:id])
+    @order.line_items.where(item: @item).destroy
+    redirect_back fallback_location: root_path
   end
 
   def index

@@ -21,3 +21,5 @@ $(function() {
     $(".alert").alert('close');
 });
 })
+
+$().button('dispose')

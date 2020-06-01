@@ -6,16 +6,24 @@
           <div class="card p-3 text-center">
             장바구니가 비어있습니다
           </div>
+        <% else %>
+          <% @order.line_items.each do |line_item| %>
+            <div class="card">
+              <div class="card p-3 mb-3">
+                <%= line_item.item.title %> <%= line_item.amount %>
+              </div>
+
+              <%= link_to "X", @order, method: :delete, data: {confirm: "정말로 삭제하시겠습니까?"}, class: "btn btn-danger btn-sm" %>
+              <% hidden_field_tag :item, line_item.item%>
+            </div>
+
+          <% end %>
+          <p>
+            총금액: <%= number_with_delimiter @order.total %>원
+          </p>
+          <%= link_to "주문하기", edit_order_path(@order), class: "btn btn-primary" %>
         <% end %>
-        <% @order.line_items.each do |line_item| %>
-          <div class="card p-3 mb-3">
-            <%= line_item.item.title %> <%= line_item.amount %>
-          </div>
-        <% end %>
-        <p>
-          총금액: <%= number_with_delimiter @order.total %>원
-        </p>
-        <%= link_to "주문하기", edit_order_path(@order), class: "btn btn-primary"  %>
+
 
     </div>
   </div>
