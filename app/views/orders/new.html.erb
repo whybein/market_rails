@@ -12,9 +12,9 @@
               <div class="card p-3 mb-3">
                 <%= line_item.item.title %> <%= line_item.amount %>
               </div>
+              <%= hidden_field_tag :item_id, line_item.id %>
+              <%= link_to "X", line_item, method: :delete, data: {confirm: "정말로 삭제하시겠습니까?"}, class: "btn btn-danger btn-sm" %>
 
-              <%= link_to "X", @order, method: :delete, data: {confirm: "정말로 삭제하시겠습니까?"}, class: "btn btn-danger btn-sm" %>
-              <% hidden_field_tag :item, line_item.item%>
             </div>
 
           <% end %>

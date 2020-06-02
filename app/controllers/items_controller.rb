@@ -16,6 +16,7 @@ class ItemsController < ApplicationController
         @items = @items.where(category_id: params[:category_id])
       end
     end
+    # byebug
     @items = @items.ransack(title_or_description_cont: params[:q]).result(distinct: true) if params[:q].present?
     @items = params[:order].blank? ? @items.order(created_at: :desc) : @items.order(params[:order])
     @items = @items.page(params[:page]).per(20)

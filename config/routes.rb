@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   end
 
   resources :orders
+  resources :line_items
   resources :user_items
   root "items#index"
 end

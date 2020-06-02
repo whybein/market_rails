@@ -18,12 +18,6 @@ class OrdersController < ApplicationController
     redirect_to @order
   end
 
-  def destroy
-    @order = Order.find(params[:id])
-    @order.line_items.where(item: @item).destroy
-    redirect_back fallback_location: root_path
-  end
-
   def index
     @orders = current_user.orders.order(:paid_at).page(params[:page]).per(10)
   end
