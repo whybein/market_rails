@@ -1,0 +1,15 @@
+<% comment ||= nil %>
+<% if comment %>
+  <div class="list-group-item list-group-item-action" data-id="<%= comment.id %>">
+    <div class="row">
+      <div class="col-md-2"><%= comment.user&.email %></div>
+      <div class="col-md-7"><%= comment.content %></div>
+      <div class="col-md-3 text-right">
+        <!-- <%# link_to "수정", edit_comment_path(comment) %> / -->
+        <% if current_user == comment.user %>
+          <%= link_to "삭제", comment, method: :delete, class: "text-danger", remote: true %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

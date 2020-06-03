@@ -16,4 +16,12 @@
       <%= simple_format @item.description %>
     </div>
   </div>
+  <% if current_user %>
+  <%= render "comments/form", comment: Comment.new, item: @item, user: current_user %>
+  <% end %>
+  <hr>
+
+  <%= render 'comments/comments', comments: @item.comments.order(created_at: :desc) %>
+  <hr>
+  <%= link_to "뒤로가기", items_path %>
 </div>

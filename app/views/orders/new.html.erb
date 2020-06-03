@@ -8,15 +8,27 @@
           </div>
         <% else %>
           <% @order.line_items.each do |line_item| %>
-            <div class="card">
-              <div class="card p-3 mb-3">
-                <%= line_item.item.title %> <%= line_item.amount %>
+          <!-- $(".card[data-id='']") -->
+              <div class="card mb-3" data-id="<%= line_item.id %>">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-6 align-self-center">
+                      <%= line_item.item.title %>
+                    </div>
+                    <div class="col-2 align-self-center"><%= line_item.amount %></div>
+                    <div class="col-3 text-right align-self-center"><%= number_with_delimiter line_item.amount * line_item.price %>원</div>
+                    <div class="col-1 text-right align-self-center">
+                      <%= link_to line_item, method: :delete, data: {confirm: "정말로 삭제하시겠습니까?"}, class: "btn btn-secondary btn-xs", remote: true do %>
+                        <span class="span">X</span>
+                      <% end %>
+                    </div>
+
+                  </div>
+
+                  <%# hidden_field_tag :item_id, line_item.id %>
+
+                </div>
               </div>
-              <%= hidden_field_tag :item_id, line_item.id %>
-              <%= link_to "X", line_item, method: :delete, data: {confirm: "정말로 삭제하시겠습니까?"}, class: "btn btn-danger btn-sm" %>
-
-            </div>
-
           <% end %>
           <p>
             총금액: <%= number_with_delimiter @order.total %>원
@@ -28,3 +40,20 @@
     </div>
   </div>
 </div>
+
+
+<script>
+  // setTimeout(function(){
+  //   $.ajax({
+  //     url: "<%= root_path %>",
+  //     method: "GET",
+  //     data:{
+  //       line_item_id: "<%= 123123 %>"
+  //     },
+  //     content: "javascript/application"
+  //   }).done(function(){
+  //     alert("ajax completed")
+  //   })
+  // },3000)
+
+</script>

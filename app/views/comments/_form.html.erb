@@ -1,0 +1,17 @@
+<% comment ||= nil %>
+<% item ||= nil %>
+<% user ||= nil %>
+<% if comment && item && user %>
+
+  <hr>
+  <div class="form-group">
+    <%= form_for comment, remote: true do |f| %>
+      <%= f.text_area :content, class: "form-control" %>
+      <div class="row p-3 justify-content-end">
+        <%= f.submit "댓글 작성", class: "btn btn-secondary" %>
+      </div>
+      <%= f.hidden_field :item_id, value: item.id %>
+      <%= f.hidden_field :user_id, value: user.id %>
+    <% end %>
+  </div>
+<% end %>

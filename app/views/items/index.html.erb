@@ -11,7 +11,9 @@
         <div class="form-inline float-left">
           <%= text_field_tag :q, params[:q], class: "form-control mr-1" %>
           <%#= hidden_field_tag :category_id, params[:category_id] %>
-          <%= hidden_field_tag :category_id, @category.id %>
+          <% if params[:category_id].present? %>
+            <%= hidden_field_tag :category_id, @category.id %>
+          <% end %>
           <%= submit_tag "검색", class: "btn btn-primary mr-1"%>
 
         </div>

@@ -13,5 +13,6 @@ Rails.application.routes.draw do
   resources :orders
   resources :line_items
   resources :user_items
+  resources :comments
   root "items#index"
 end
