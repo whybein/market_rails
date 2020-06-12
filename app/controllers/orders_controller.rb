@@ -6,6 +6,7 @@ class OrdersController < ApplicationController
 
   def new
     @order = get_cart
+    
   end
 
   def edit

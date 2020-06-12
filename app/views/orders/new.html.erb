@@ -1,42 +1,36 @@
 <div class="container my-5">
   <div class="row">
-    <div class="col-12">
-
-        <% if @order.line_items.blank? %>
-          <div class="card p-3 text-center">
-            장바구니가 비어있습니다
-          </div>
-        <% else %>
-          <% @order.line_items.each do |line_item| %>
-          <!-- $(".card[data-id='']") -->
-              <div class="card mb-3" data-id="<%= line_item.id %>">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-6 align-self-center">
-                      <%= line_item.item.title %>
-                    </div>
-                    <div class="col-2 align-self-center"><%= line_item.amount %></div>
-                    <div class="col-3 text-right align-self-center"><%= number_with_delimiter line_item.amount * line_item.price %>원</div>
-                    <div class="col-1 text-right align-self-center">
-                      <%= link_to line_item, method: :delete, data: {confirm: "정말로 삭제하시겠습니까?"}, class: "btn btn-secondary btn-xs", remote: true do %>
-                        <span class="span">X</span>
-                      <% end %>
-                    </div>
-
-                  </div>
-
-                  <%# hidden_field_tag :item_id, line_item.id %>
-
+    <div class="col-12 cart">
+      <% if @order.line_items.blank? %>
+        <div class="card p-3 text-center">
+          장바구니가 비어있습니다.
+        </div>
+      <% else %>
+        <% @order.line_items.each do |line_item| %>
+        <!-- $(".card[data-id='']") -->
+          <div class="card mb-3" data-id="<%= line_item.id %>">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-6 align-self-center">
+                  <%= line_item.item.title %>
+                </div>
+                <div class="col-2 align-self-center"><%= line_item.amount %></div>
+                <div class="col-3 text-right align-self-center"><%= number_with_delimiter line_item.amount * line_item.price %>원</div>
+                <div class="col-1 text-right align-self-center">
+                  <%= link_to line_item, method: :delete, data: {confirm: "정말로 삭제하시겠습니까?"}, class: "btn btn-secondary btn-xs", remote: true do %>
+                    <span class="span">X</span>
+                  <% end %>
                 </div>
               </div>
-          <% end %>
-          <p>
-            총금액: <%= number_with_delimiter @order.total %>원
-          </p>
-          <%= link_to "주문하기", edit_order_path(@order), class: "btn btn-primary" %>
+              <%# hidden_field_tag :item_id, line_item.id %>
+            </div>
+          </div>
         <% end %>
-
-
+        <div class="amount-total">
+          <%= render 'total_amount', order: @order %>
+        </div>
+        <%= link_to "주문하기", edit_order_path(@order), class: "btn btn-primary" %>
+      <% end %>
     </div>
   </div>
 </div>

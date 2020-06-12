@@ -12,6 +12,7 @@ class LineItem < ApplicationRecord
   # line_item 본인이 아니라 order를 수정하는 것이므로  after_save 후 order.update를 해도 될듯
 
   # after_save :set_order_total
+  after_destroy :set_order_total
 
   def set_order_total
     puts "set_order_total"

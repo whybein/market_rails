@@ -1,2 +1,7 @@
 alert("삭제되었습니다.");
 $(".card[data-id='<%= @line_item.id %>']").remove();
+$(".amount-total").html("<%= j(render 'orders/total_amount', order: @line_item.order) %>");
+
+<% if @line_item.order.total == 0 %>
+  $(".cart").html('<div class="card p-3 text-center">장바구니가 비어있습니다.</div>');
+<% end %>
